@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeptaBus.Core.Tests", "SeptaBus.Core.Tests\SeptaBus.Core.Tests.csproj", "{20B9897E-EA60-47B8-84F5-637736A0360B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeptaBus.Core", "SeptaBus.Core\SeptaBus.Core.csproj", "{CCE3D88B-4357-40E3-B59A-B62D66711FC8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeptaBus.StructureMap", "SeptaBus.StructureMap\SeptaBus.StructureMap.csproj", "{72D13873-1D84-4883-B3E3-F24FC88F9C0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeptaBus.StructureMap.Tests", "SeptaBus.StructureMap.Tests\SeptaBus.StructureMap.Tests.csproj", "{8A3FF555-5E8B-49AC-9263-C7383D97C8FA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{AE302483-B683-45A6-9499-BB61A20A47CE}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{20B9897E-EA60-47B8-84F5-637736A0360B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20B9897E-EA60-47B8-84F5-637736A0360B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20B9897E-EA60-47B8-84F5-637736A0360B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20B9897E-EA60-47B8-84F5-637736A0360B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCE3D88B-4357-40E3-B59A-B62D66711FC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCE3D88B-4357-40E3-B59A-B62D66711FC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCE3D88B-4357-40E3-B59A-B62D66711FC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCE3D88B-4357-40E3-B59A-B62D66711FC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72D13873-1D84-4883-B3E3-F24FC88F9C0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72D13873-1D84-4883-B3E3-F24FC88F9C0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72D13873-1D84-4883-B3E3-F24FC88F9C0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72D13873-1D84-4883-B3E3-F24FC88F9C0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A3FF555-5E8B-49AC-9263-C7383D97C8FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A3FF555-5E8B-49AC-9263-C7383D97C8FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A3FF555-5E8B-49AC-9263-C7383D97C8FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A3FF555-5E8B-49AC-9263-C7383D97C8FA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
