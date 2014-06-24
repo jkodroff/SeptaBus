@@ -38,7 +38,7 @@ namespace SeptaBus
 
         private class MyEventHandler1 : IHandler<MyEvent>
         {
-            public void Handle(MyEvent args)
+            public void Handle(MyEvent message)
             {
                 throw new NotImplementedException();
             }
@@ -46,7 +46,7 @@ namespace SeptaBus
 
         private class MyEventHandler2 : IHandler<MyEvent>
         {
-            public void Handle(MyEvent args)
+            public void Handle(MyEvent message)
             {
                 throw new NotImplementedException();
             }
@@ -54,7 +54,7 @@ namespace SeptaBus
 
         private class MyCommandHandler : IHandler<MyCommand>
         {
-            public void Handle(MyCommand args)
+            public void Handle(MyCommand message)
             {
                 throw new NotImplementedException();
             }

@@ -141,7 +141,7 @@ namespace SeptaBus
         {
             public int Count;
 
-            public void Handle(MyCommand args)
+            public void Handle(MyCommand message)
             {
                 Count++;
             }
@@ -151,7 +151,7 @@ namespace SeptaBus
         {
             public int Count;
 
-            public void Handle(MyEvent args)
+            public void Handle(MyEvent message)
             {
                 Count++;
             }
