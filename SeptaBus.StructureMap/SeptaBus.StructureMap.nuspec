@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>SeptaBus.StructureMap</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>Josh Kodroff</authors>
+    <owners>Josh Kodroff</owners>
+    <projectUrl>http://github.com/jkodroff/septabus</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>SeptaBus is an in-memory, synchronous message bus.</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright 2014, All Rights Reserved</copyright>
+  </metadata>
+</package>

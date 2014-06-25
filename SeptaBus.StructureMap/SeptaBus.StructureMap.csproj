@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="SeptaBus.StructureMap.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SeptaBus.Core\SeptaBus.Core.csproj">
