@@ -16,9 +16,9 @@ Messages are handled by message handlers (which implement ```IHandler<T>```).  M
 ## Decorators
 SeptaBus provides the ability to add contextual information to messages via *decorators*.  Included out-of-the-box are the following decorators, which take care of common cross-cutting concerns:
 
-1.  ```TimeStampDecorator``` - Adds a timestamp to the "On" header indicating when the message was sent/published on the bus.
-2.  ```UserNameDecorator``` - Adds the current user's name to the "By" header.  (You'll need to write a quick implemnentation of ```IUserNameProvider```, which may be as simple as ```return HttpContext.Current.User.Identity.Name;```.
-3.  ```RolesDecorator``` - Adds the roles that the current user is a member of.  (You'll need to write a quick implementation of ```IRolesProvider``` which may be as simple as ```return Roles.GetRolesForUser();```
+1.  ```TimeStampDecorator``` - Adds a timestamp to the ```On``` header indicating when the message was sent/published on the bus.
+2.  ```UserNameDecorator``` - Adds the current user's name to the ```By``` header.  (You'll need to write a quick implemnentation of ```IUserNameProvider```, which may be as simple as ```return HttpContext.Current.User.Identity.Name;```.
+3.  ```RolesDecorator``` - Adds the roles that the current user is a member of to the ```Roles```.  (You'll need to write a quick implementation of ```IRolesProvider``` which may be as simple as ```return Roles.GetRolesForUser();```
 
 ## An example
 ```
