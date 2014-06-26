@@ -1,3 +1,4 @@
+*.nupkg
 obj/
 [Bb]in
 [Dd]ebug*/
