@@ -11,6 +11,15 @@ In SeptaBus, there are two types of messages:
 1. Commands, which tell the system to do something.  Commands should have exactly 1 handler.
 2. Events, which indicate that something has happened.  Events may have 0 to many handlers.
 
+Messages are handled by message handlers (which implement ```IHandler<T>```).  Messages are connected to their handlers via a DI container.  At present, only [StructureMap](http://docs.structuremap.net/) is supported but adding support for additional containers is pretty easy.
+
+## Decorators
+SeptaBus provides the ability to add contextual information to messages via *decorators*.  Included out-of-the-box are the following decorators, which take care of common cross-cutting concerns:
+
+1.  ```TimeStampDecorator``` - Adds a timestamp to the "On" header indicating when the message was sent/published on the bus.
+2.  ```UserNameDecorator``` - Adds the current user's name to the "By" header.  (You'll need to write a quick implemnentation of ```IUserNameProvider```, which may be as simple as ```return HttpContext.Current.User.Identity.Name;```.
+3.  ```RolesDecorator``` - Adds the roles that the current user is a member of.  (You'll need to write a quick implementation of ```IRolesProvider``` which may be as simple as ```return Roles.GetRolesForUser();```
+
 ## An example
 ```
 // This is a command.  Sending it on the bus tells the system to submit 
