@@ -32,21 +32,23 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bus.cs" />
     <Compile Include="CommandBase.cs" />
+    <Compile Include="Decorators\HeadersExtensions.cs" />
+    <Compile Include="Decorators\IRolesProvider.cs" />
+    <Compile Include="Decorators\IUserNameProvider.cs" />
+    <Compile Include="Decorators\RolesDecorator.cs" />
+    <Compile Include="Decorators\TimestampDecorator.cs" />
+    <Compile Include="Decorators\UserNameDecorator.cs" />
     <Compile Include="EventBase.cs" />
     <Compile Include="IBus.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="IEvent.cs" />
     <Compile Include="IHandler.cs" />
     <Compile Include="IHandlerProvider.cs" />
+    <Compile Include="IHasHeaders.cs" />
     <Compile Include="IMessage.cs" />
     <Compile Include="IMessageDecorator.cs" />
     <Compile Include="IMessageDecoratorProvider.cs" />

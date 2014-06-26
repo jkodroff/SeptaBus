@@ -7,7 +7,7 @@
     <ProjectGuid>{20B9897E-EA60-47B8-84F5-637736A0360B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SeptaBus.Core</RootNamespace>
+    <RootNamespace>SeptaBus</RootNamespace>
     <AssemblyName>SeptaBus.Core.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -48,6 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusTests.cs" />
+    <Compile Include="Decorators\RolesDecoratorTests.cs" />
+    <Compile Include="Decorators\TimestampDecoratorTests.cs" />
+    <Compile Include="Decorators\UserNameDecoratorTests.cs" />
     <Compile Include="MessageBaseTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -5,7 +5,7 @@ namespace SeptaBus
     /// <summary>
     /// A message class which adds a dictionary of message headers.
     /// </summary>
-    public abstract class MessageBase : IMessage
+    public abstract class MessageBase : IMessage, IHasHeaders
     {
         private IDictionary<string, object> _headers;
 
