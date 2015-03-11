@@ -17,3 +17,4 @@ packages
 *.squishit.debug.css
 .sass-cache
 packages/
+/node_modules

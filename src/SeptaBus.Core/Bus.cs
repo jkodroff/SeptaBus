@@ -20,7 +20,7 @@ namespace SeptaBus
             if (commands == null || !commands.Any())
                 return;
 
-            var sendInternal = typeof(Bus)
+            var sendInternal = typeof (Bus)
                 .GetMethod("SendInternal", BindingFlags.Instance | BindingFlags.NonPublic);
 
             foreach (var command in commands)
@@ -30,8 +30,8 @@ namespace SeptaBus
                 try
                 {
                     sendInternal
-                        .MakeGenericMethod(new[] { command.GetType() })
-                        .Invoke(this, new[] { command });
+                        .MakeGenericMethod(new[] {command.GetType()})
+                        .Invoke(this, new[] {command});
                 }
                 catch (TargetInvocationException ex)
                 {
@@ -46,7 +46,7 @@ namespace SeptaBus
                 return;
 
             var publishInternal =
-                typeof(Bus)
+                typeof (Bus)
                     .GetMethod("PublishInternal", BindingFlags.Instance | BindingFlags.NonPublic);
 
             foreach (var @event in events)
@@ -63,7 +63,28 @@ namespace SeptaBus
                 {
                     throw ex.InnerException;
                 }
+            }
+        }
 
+        public void Send<TResp>(IRequest<TResp> request) where TResp : IResponse
+        {
+            if (request == null)
+                throw new ArgumentNullException("request");
+
+            var sendInternal = typeof(Bus)
+                .GetMethod("SendRequestInternal", BindingFlags.Instance | BindingFlags.NonPublic);
+
+            RunDecorators(request);
+
+            try
+            {
+                sendInternal
+                    .MakeGenericMethod(new[] { request.GetType() })
+                    .Invoke(this, new[] { request });
+            }
+            catch (TargetInvocationException ex)
+            {
+                throw ex.InnerException;
             }
         }
 
@@ -75,15 +96,34 @@ namespace SeptaBus
             }
         }
 
+        // Invoked via reflection, so:
+        // ReSharper disable once UnusedMember.Local
         private void SendInternal<TCommand>(TCommand command) where TCommand : class, ICommand
         {
             var handler = _handlerProvider.GetCommandHandler(command);
             if (handler == null)
-                throw new Exception(string.Format("There is no handler registered for the command of type '{0}'.", command.GetType()));
+                throw new Exception(string.Format("There is no handler registered for the command of type '{0}'.",
+                    command.GetType()));
 
             handler.Handle(command);
         }
 
+        // Invoked via reflection, so:
+        // ReSharper disable once UnusedMember.Local
+        private TResp SendRequestInternal<TReq, TResp>(TReq command)
+            where TReq : IRequest<TResp>
+            where TResp : IResponse
+        {
+            var handler = _handlerProvider.GetRequestHandler<TReq, TResp>(command);
+            if (handler == null)
+                throw new Exception(string.Format("There is no handler registered for the request of type '{0}'.",
+                    command.GetType()));
+
+            return handler.Handle(command);
+        }
+
+        // Invoked via reflection, so:
+        // ReSharper disable once UnusedMember.Local
         private void PublishInternal<TEvent>(TEvent @event) where TEvent : class, IEvent
         {
             var handlers = _handlerProvider.GetEventHandlers(@event);

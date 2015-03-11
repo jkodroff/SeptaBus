@@ -5,9 +5,16 @@ namespace SeptaBus
 {
     public class StructureMapDecoratorProvider : IMessageDecoratorProvider
     {
+        private IContainer _container;
+
+        public StructureMapDecoratorProvider(IContainer container)
+        {
+            _container = container;
+        }
+
         public IEnumerable<IMessageDecorator> GetDecorators()
         {
-            return ObjectFactory.GetAllInstances<IMessageDecorator>();
+            return _container.GetAllInstances<IMessageDecorator>();
         }
     }
 }

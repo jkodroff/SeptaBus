@@ -81,10 +81,15 @@ namespace SeptaBus
 
         private class MyCommand : ICommand { }
 
+        private class MyReqest : IRequest<MyResponse> { }
+
+        private class MyResponse : IResponse { }
+
         private class MockHandlerProvider : IHandlerProvider
         {
             private IEnumerable<IHandler<MyEvent>> _eventHandlers;
             private IHandler<MyCommand> _commandHandler;
+            private IRequestHandler<MyReqest, MyResponse> _requestHandler;
 
             public MockHandlerProvider()
             {
@@ -96,6 +101,7 @@ namespace SeptaBus
             {
                 _eventHandlers = eventHandlers ?? new[] { new MyEventHandler() };
                 _commandHandler = commandHandler ?? new MyCommandHandler();
+                _requestHandler = _requestHandler ?? new MyRequestHandler();
             }
 
             public IHandler<T> GetCommandHandler<T>(T command) where T : ICommand
@@ -109,6 +115,14 @@ namespace SeptaBus
                     throw new NotImplementedException();
 
                 return _eventHandlers.Cast<IHandler<T>>();
+            }
+
+            public IRequestHandler<TReq, TResp> GetRequestHandler<TReq, TResp>(TReq request) where TReq : IRequest<TResp> where TResp : IResponse
+            {
+                if (!(request is MyReqest))
+                    throw new NotImplementedException();
+                
+                return _requestHandler as IRequestHandler<TReq, TResp>;
             }
         }
 
@@ -154,6 +168,14 @@ namespace SeptaBus
             public void Handle(MyEvent message)
             {
                 Count++;
+            }
+        }
+
+        private class MyRequestHandler : IRequestHandler<MyReqest, MyResponse>
+        {
+            public MyResponse Handle(MyReqest message)
+            {
+                return new MyResponse();
             }
         }
     }
