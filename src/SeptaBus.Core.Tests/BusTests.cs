@@ -38,7 +38,7 @@ namespace SeptaBus
         }
 
         [Test]
-        public void Send_NoHandler_ThrowsException()
+        public void Send_Command_NoHandler_ThrowsException()
         {
             var bus = new Bus(new MockHandlerProvider(), new MockDecoratorProvider());
 
@@ -48,7 +48,7 @@ namespace SeptaBus
         }
 
         [Test]
-        public void Send_CallsHandler()
+        public void Send_Command_CallsHandler()
         {
             var handler = new MyCommandHandler();
             var handlerProvider = new MockHandlerProvider(null, handler);
@@ -61,7 +61,7 @@ namespace SeptaBus
         }
 
         [Test]
-        public void Send_CallsDecorators()
+        public void Send_Command_CallsDecorators()
         {
             var decorator1 = new MyDecorator();
             var decorator2 = new MyDecorator();
@@ -77,11 +77,51 @@ namespace SeptaBus
             decorator2.Count.Should().Be(1);
         }
 
+        [Test]
+        public void Send_Request_NoHandler_ThrowsException()
+        {
+            var bus = new Bus(new MockHandlerProvider(), new MockDecoratorProvider());
+
+            bus
+                .Invoking(x => x.Send(new MyCommand()))
+                .ShouldThrow<Exception>().WithMessage("*no handler registered*");
+        }
+
+        [Test]
+        public void Send_Request_CallsHandler()
+        {
+            var handler = new MyRequestHandler();
+            var handlerProvider = new MockHandlerProvider(null, null, handler);
+
+            var bus = new Bus(handlerProvider, new MockDecoratorProvider());
+
+            var resp = bus.Send(new MyRequest());
+
+            resp.Should().NotBeNull();
+        }
+
+        [Test]
+        public void Send_Request_CallsDecorators()
+        {
+            var decorator1 = new MyDecorator();
+            var decorator2 = new MyDecorator();
+
+            var bus = new Bus(
+                new MockHandlerProvider(null, null, new MyRequestHandler()),
+                new MockDecoratorProvider(new[] { decorator1, decorator2 })
+            );
+
+            bus.Send(new MyRequest());
+
+            decorator1.Count.Should().Be(1);
+            decorator2.Count.Should().Be(1);
+        }
+
         private class MyEvent : IEvent { }
 
         private class MyCommand : ICommand { }
 
-        private class MyReqest : IRequest<MyResponse> { }
+        private class MyRequest : IRequest<MyResponse> { }
 
         private class MyResponse : IResponse { }
 
@@ -89,19 +129,21 @@ namespace SeptaBus
         {
             private IEnumerable<IHandler<MyEvent>> _eventHandlers;
             private IHandler<MyCommand> _commandHandler;
-            private IRequestHandler<MyReqest, MyResponse> _requestHandler;
+            private IRequestHandler<MyRequest, MyResponse> _requestHandler;
 
             public MockHandlerProvider()
             {
                 _eventHandlers = new List<IHandler<MyEvent>>();
             }
 
-            public MockHandlerProvider(IEnumerable<IHandler<MyEvent>> eventHandlers = null,
-                IHandler<MyCommand> commandHandler = null)
-            {
+            public MockHandlerProvider(
+                IEnumerable<IHandler<MyEvent>> eventHandlers = null,
+                IHandler<MyCommand> commandHandler = null,
+                IRequestHandler<MyRequest, MyResponse> requestHandler = null
+            ) {
                 _eventHandlers = eventHandlers ?? new[] { new MyEventHandler() };
                 _commandHandler = commandHandler ?? new MyCommandHandler();
-                _requestHandler = _requestHandler ?? new MyRequestHandler();
+                _requestHandler = requestHandler ?? new MyRequestHandler();
             }
 
             public IHandler<T> GetCommandHandler<T>(T command) where T : ICommand
@@ -119,7 +161,7 @@ namespace SeptaBus
 
             public IRequestHandler<TReq, TResp> GetRequestHandler<TReq, TResp>(TReq request) where TReq : IRequest<TResp> where TResp : IResponse
             {
-                if (!(request is MyReqest))
+                if (!(request is MyRequest))
                     throw new NotImplementedException();
                 
                 return _requestHandler as IRequestHandler<TReq, TResp>;
@@ -171,9 +213,9 @@ namespace SeptaBus
             }
         }
 
-        private class MyRequestHandler : IRequestHandler<MyReqest, MyResponse>
+        private class MyRequestHandler : IRequestHandler<MyRequest, MyResponse>
         {
-            public MyResponse Handle(MyReqest message)
+            public MyResponse Handle(MyRequest message)
             {
                 return new MyResponse();
             }

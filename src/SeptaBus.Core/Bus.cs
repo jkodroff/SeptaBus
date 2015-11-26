@@ -66,7 +66,7 @@ namespace SeptaBus
             }
         }
 
-        public void Send<TResp>(IRequest<TResp> request) where TResp : IResponse
+        public TResp Send<TResp>(IRequest<TResp> request) where TResp : IResponse
         {
             if (request == null)
                 throw new ArgumentNullException("request");
@@ -78,8 +78,8 @@ namespace SeptaBus
 
             try
             {
-                sendInternal
-                    .MakeGenericMethod(new[] { request.GetType() })
+                return (TResp)sendInternal
+                    .MakeGenericMethod(new[] { request.GetType(), typeof(TResp) })
                     .Invoke(this, new[] { request });
             }
             catch (TargetInvocationException ex)

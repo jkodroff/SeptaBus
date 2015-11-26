@@ -83,7 +83,7 @@ namespace SeptaBus
         {
             public MyResponse Handle(MyRequest message)
             {
-                throw new NotImplementedException();
+                return new MyResponse();
             }
         }
     }
