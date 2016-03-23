@@ -21,7 +21,7 @@ SeptaBus provides the ability to add contextual information to messages via *dec
 3.  ```RolesDecorator``` - Adds the roles that the current user is a member of to the ```Roles```.  (You'll need to write a quick implementation of ```IRolesProvider``` which may be as simple as ```return Roles.GetRolesForUser();```
 
 ## An example
-```
+```c#
 // This is a command.  Sending it on the bus tells the system to submit 
 // the order with the supplied id.
 public class SubmitOrder : ICommand
