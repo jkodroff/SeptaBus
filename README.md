@@ -1,9 +1,9 @@
 SeptaBus
 ========
 
-Yet another in-memory message bus for .NET.  "It's getting there."
+"It's getting there."
 
-SeptaBus is an in-memory message bus.  It allows you to structure the logic of your application using the [pub-sub pattern](http://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern).  When used properly it'll help keep your code clean so that you focus on expressing your domain logic.
+SeptaBus is an implementation of the [Mediator Pattern](https://en.wikipedia.org/wiki/Mediator_pattern): it decouples messages from the code that handles the messages, keeping your code clear and simple with few dependencies so you can focus on expressing your domain logic instead of how to structure your domain logic.
 
 ## The basics
 In SeptaBus, there are two types of messages:
